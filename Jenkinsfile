@@ -1,9 +1,9 @@
 pipeline {
     agent any
     environment {
-        PROJECT_ID = '<project id>'
-        CLUSTER_NAME = 'abhishek-jenkins'
-        LOCATION = 'asia-south1-a'
+        PROJECT_ID = 'kubernetes-project-340710'
+        CLUSTER_NAME = 'gke-cluster'
+        LOCATION = 'asia-south1'
         CREDENTIALS_ID = 'project credentials'
     }
     stages {
@@ -15,7 +15,7 @@ pipeline {
         stage("Build image") {
             steps {
                 script {
-                    myapp = docker.build("abhishek7389/hello:${env.BUILD_ID}")
+                    myapp = docker.build("omkarguj30/hello:${env.BUILD_ID}")
                 }
             }
         }
