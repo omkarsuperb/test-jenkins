@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage("Checkout code") {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/rushabhmahale/jenkin-k8s.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/omkarsuperb/test-jenkins.git']]])
             }
         }
         stage("Build image") {
