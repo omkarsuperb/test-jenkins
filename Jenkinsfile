@@ -9,30 +9,33 @@ pipeline {
     stages {
         stage("Checkout code") {
             steps {
-                checkout scm
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/rushabhmahale/jenkin-k8s.git']]])
             }
         }
         stage("Build image") {
             steps {
                 script {
-                    myapp = docker.build("omkarguj30/hello:${env.BUILD_ID}")
+                      Img = docker.build(
+                          "omkarguj30/hello:latest",
+                          "-f Dockerfile ."
+                          )
                 }
             }
         }
         stage("Push image") {
             steps {
                 script {
-		   withDockerRegistry([credentialsId: "gcr:GCR", url: "https://gcr.io"]) {
+                    withDockerRegistry([credentialsId: "gcr:GCR", url: "https://gcr.io"]) {
                       sh "docker push omkarguj30/hello:latest"
-                    }
                     }
                 }
             }
-        }        
+        }
         stage('Deploy to GKE') {
             steps{
                 sh "sed -i 's/hello:latest/hello:${env.BUILD_ID}/g' deployment.yaml"
                 step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
             }
-	}
+	    }
      }
+}
