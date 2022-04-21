@@ -23,7 +23,7 @@ pipeline {
             steps {
                 script {
 		   withDockerRegistry([credentialsId: "gcr:GCR", url: "https://gcr.io"]) {
-                      sh "docker push searce-playground-v1/rushabhapache:latest"
+                      sh "docker push omkarguj30/hello:latest"
                     }
                     }
                 }
