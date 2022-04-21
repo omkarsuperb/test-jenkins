@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                       Img = docker.build(
-                          "omkarguj30/hello:latest",
+                          "gcr.io/omkarguj30/hello:latest",
                           "-f Dockerfile ."
                           )
                 }
@@ -26,7 +26,7 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry([credentialsId: "gcr:GCR", url: "https://gcr.io"]) {
-                      sh "docker push omkarguj30/hello:latest"
+                      sh "docker push gcr.io/omkarguj30/hello:latest"
                     }
                 }
             }
