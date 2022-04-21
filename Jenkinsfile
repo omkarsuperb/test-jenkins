@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         PROJECT_ID = 'kubernetes-project-340710'
-        CLUSTER_NAME = 'gke-cluster'
+        CLUSTER_NAME = 'cluster-1'
         LOCATION = 'asia-south1'
         CREDENTIALS_ID = 'jenkins-gke'
     }
