@@ -2,8 +2,8 @@ pipeline {
     agent any
     environment {
         PROJECT_ID = 'kubernetes-project-340710'
-        CLUSTER_NAME = 'cluster-2'
-        LOCATION = 'asia-south1-a'
+        CLUSTER_NAME = 'cluster-3'
+        LOCATION = 'asia-south1-c'
         CREDENTIALS_ID = 'jenkins-gke'
     }
     stages {
@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                       Img = docker.build(
-                          "gcr.io/kubernetes-project-340710/hello:latest",
+                          "gcr.io/kubernetes-project-340710/hello",
                           "-f Dockerfile ."
                           )
                 }
@@ -26,7 +26,7 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry([credentialsId: "gcr:GCR", url: "https://gcr.io"]) {
-                      sh "docker push gcr.io/kubernetes-project-340710/hello:latest"
+                      sh "docker push gcr.io/kubernetes-project-340710/hello"
                     }
                 }
             }
