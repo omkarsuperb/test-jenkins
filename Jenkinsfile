@@ -4,7 +4,7 @@ pipeline {
         PROJECT_ID = 'kubernetes-project-340710'
         CLUSTER_NAME = 'gke-cluster'
         LOCATION = 'asia-south1'
-        CREDENTIALS_ID = 'project credentials'
+        CREDENTIALS_ID = 'jenkins-gke'
     }
     stages {
         stage("Checkout code") {
