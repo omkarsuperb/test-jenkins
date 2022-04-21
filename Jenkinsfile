@@ -22,9 +22,9 @@ pipeline {
         stage("Push image") {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                            myapp.push("latest")
-                            myapp.push("${env.BUILD_ID}")
+		   withDockerRegistry([credentialsId: "gcr:GCR", url: "https://gcr.io"]) {
+                      sh "docker push searce-playground-v1/rushabhapache:latest"
+                    }
                     }
                 }
             }
