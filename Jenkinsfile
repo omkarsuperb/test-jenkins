@@ -25,7 +25,7 @@ pipeline {
         stage("Push image") {
             steps {
                 script {
-                    withDockerRegistry([credentialsId: "gcr:GCR", url: "https://gcr.io"]) {
+                    withDockerRegistry([credentialsId: "gcr:gcr", url: "https://gcr.io"]) {
                       sh "docker push gcr.io/kubernetes-project-340710/new"
                     }
                 }
