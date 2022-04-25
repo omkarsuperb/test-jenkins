@@ -31,6 +31,11 @@ pipeline {
                 }
             }
         }
+	stage('Creating Artifact'){
+            steps{
+                archiveArtifacts artifacts: '**', followSymlinks: false
+                 }
+        }
         stage('Deploy to GKE') {
             steps{
                 sh "sed -i 's/hello:latest/hello:${env.BUILD_ID}/g' deployment.yaml"
